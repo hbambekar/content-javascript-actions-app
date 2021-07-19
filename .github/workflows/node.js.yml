@@ -13,13 +13,13 @@ jobs:
         exclude:
           - os: macos-latest
             node: 10
-steps:
-  - users: actions/checkout@v2
-  - name: Use node.js ${{ matrix.node }}
-    uses: actions/setup-node@v1
-    with:
-        node-version: \${{ matrix.node }} 
-  - run: npm ci 
-  - run: npm run build --if-present
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        with:
+            node-version: \${{ matrix.node }} 
+      - run: npm ci 
+      - run: npm run build --if-present
     
         
