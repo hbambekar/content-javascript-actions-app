@@ -1,0 +1,25 @@
+name: build
+on:
+  push:
+    paths: 
+      - '**.js'
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [macos-latest, windows-latest, ubuntu-latest]
+        node: [10, 12,14]
+        exclude:
+          - os: macos-latest
+            node: 10
+steps:
+  - users: actions/checkout@v2
+  - name: Use node.js ${{ matrix.node }}
+    uses: actions/setup-node@v1
+      with:
+        node-version: \${{ matrix.node }} 
+    - run: npm ci 
+    - run: npm run build --if-present
+    
+        
